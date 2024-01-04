@@ -2,14 +2,22 @@ sudo pacman -Sy linux-lts-headers intel-ucode git clang curl wget zsh neovim xor
 
 xdg-user-dirs-update
 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended --keep-zshrc" \
+cp ./assets/zshrc ~/.zshrc \
+chsh -s $(which zsh)
+
+mkdir -p ~/.config/nvim
+cp ./assets/vimrc ~/.config/nvim/init.vim
+
 cd ~/Downloads
 git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -sri
+cd yay 
+makepkg -sri 
 cd ..
 sudo rm -R yay
 cd ~
-yay -S gdm-settings
+
+yay -S gdm-settings --noconfirm
 
 cd ~/Downloads
 git clone https://github.com/vinceliuice/Graphite-gtk-theme.git
@@ -23,10 +31,13 @@ cd ..
 sudo rm -R Graphite-gtk-theme
 cd ~
 
+sudo pacman -Sy mesa lib32-mesa mesa-utils xf86-video-nouveau xf86-video-intel vulkan-intel lib32-vulkan-intel switcheroo-control --noconfirm
+sudo sed -i "s/MODULES=(/MODULES=(i915 nouveau /g" /etc/mkinitcpio.conf
+sudo mkinitcpio -P
+
 sudo systemctl enable gdm.service
 sudo systemctl enable bluetooth.service
+sudo systemctl enable switcheroo-control.service
 
-mkdir ~/.config/nvim
-cp ./assets/vimrc ~/.config/nvim/init.vim
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-cp ./assets/zshrc ~/.zshrc
+sudo pacman -Rs $(pacman -Qdtq) --noconfirm
+pacman -Sc --noconfirm
