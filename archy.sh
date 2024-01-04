@@ -1,4 +1,4 @@
-sudo pacman -Sy linux-lts-headers intel-ucode git clang curl wget zsh neovim xorg xorg-server xdg-user-dirs gnome-shell gdm gnome-terminal gnome-control-center gnome-tweaks gnome-shell-extensions gnome-system-monitor eog celluloid gnome-text-editor nautilus vivaldi vivaldi-ffmpeg-codecs libnotify breeze papirus-icon-theme gnome-backgrounds power-profiles-daemon gnome-calculator ttf-caladea ttf-carlito ttf-dejavu ttf-liberation noto-fonts ttf-opensans otf-overpass ttf-roboto tex-gyre-fonts ttf-ubuntu-font-family a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore pipewire pipewire-pulse pipewire-audio wireplumber bluez bluez-utils --noconfirm
+sudo pacman -Sy linux-lts-headers intel-ucode git clang curl wget zsh neovim xorg xorg-server xdg-user-dirs gnome-shell gdm gnome-terminal gnome-control-center gnome-tweaks gnome-shell-extensions gnome-system-monitor eog celluloid gnome-text-editor nautilus vivaldi vivaldi-ffmpeg-codecs libnotify breeze papirus-icon-theme gnome-backgrounds power-profiles-daemon gnome-calculator ttf-caladea ttf-carlito ttf-dejavu ttf-liberation noto-fonts ttf-opensans otf-overpass ttf-roboto tex-gyre-fonts ttf-ubuntu-font-family a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore pipewire pipewire-pulse pipewire-audio wireplumber bluez bluez-utils mesa lib32-mesa mesa-utils xf86-video-nouveau xf86-video-intel vulkan-intel lib32-vulkan-intel switcheroo-control --noconfirm
 
 xdg-user-dirs-update
 
@@ -31,13 +31,12 @@ cd ..
 sudo rm -R Graphite-gtk-theme
 cd ~
 
-sudo pacman -Sy mesa lib32-mesa mesa-utils xf86-video-nouveau xf86-video-intel vulkan-intel lib32-vulkan-intel switcheroo-control --noconfirm
+sudo pacman -Rs $(pacman -Qdtq) --noconfirm
+sudo pacman -Sc --noconfirm
+
 sudo sed -i "s/MODULES=(/MODULES=(i915 nouveau /g" /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 
 sudo systemctl enable gdm.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable switcheroo-control.service
-
-sudo pacman -Rs $(pacman -Qdtq) --noconfirm
-pacman -Sc --noconfirm
