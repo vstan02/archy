@@ -2,8 +2,8 @@ sudo pacman -Sy linux-lts-headers intel-ucode git clang curl wget zsh neovim xor
 
 xdg-user-dirs-update
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended --keep-zshrc" \
-cp ./assets/zshrc ~/.zshrc \
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended --keep-zshrc"
+cp ./assets/zshrc ~/.zshrc
 chsh -s $(which zsh)
 
 mkdir -p ~/.config/nvim
