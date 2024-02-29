@@ -1,0 +1,141 @@
+{
+  "yay": true,
+  "pacman-sync": true,
+  "pacman-clean": true,
+  "modules": [
+    "i915",
+    "nouveau"
+  ],
+  "services": [
+    "gdm", 
+    "bluetooth", 
+    "switcheroo-control"
+  ],
+  "packages": {
+    "pacman": {
+      "base": [
+        "linux-lts-headers", 
+        "intel-ucode", 
+        "git",
+        "clang",
+        "curl",
+        "wget",
+        { 
+          "name": "zsh",
+          "postinstall": [
+            "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended --keep-zshrc\"",
+            "cp ./assets/zshrc ~/.zshrc",
+            "chsh -s $(which zsh)"
+          ]
+        },
+        {
+          "name": "neovim",
+          "postinstall": [
+            "mkdir -p ~/.config/nvim",
+            "cp ./assets/vimrc ~/.config/nvim/init.vim"
+          ]
+        }
+      ],
+      "gnome": [
+        "xorg",
+        "xorg-server",
+        "gnome-shell",
+        "gdm",
+        "gnome-terminal",
+        "gnome-control-center",
+        "gnome-tweaks",
+        "gnome-shell-extensions",
+        "gnome-system-monitor",
+        "eog",
+        "celluloid",
+        "gnome-backgrounds",
+        "power-profiles-daemon",
+        "gnome-calculator",
+        "gnome-text-editor",
+        "nautilus",
+        { 
+          "name": "xdg-user-dirs",
+          "postinstall": ["xdg-user-dirs-update"]
+        }
+      ],
+      "bluetooth": [
+        "pipewire",
+        "pipewire-pulse",
+        "pipewire-audio",
+        "wireplumber",
+        "bluez",
+        "bluez-utils"
+      ],
+      "codecs": [
+        "a52dec",
+        "faac",
+        "faad2",
+        "flac",
+        "jasper",
+        "lame",
+        "libdca",
+        "libdv",
+        "libmad",
+        "libmpeg2",
+        "libtheora",
+        "libvorbis",
+        "libxv",
+        "wavpack",
+        "x264",
+        "xvidcore"
+      ],
+      "fonts": [
+        "ttf-caladea",
+        "ttf-carlito",
+        "ttf-dejavu",
+        "ttf-liberation",
+        "noto-fonts",
+        "ttf-opensans",
+        "otf-overpass",
+        "ttf-roboto",
+        "tex-gyre-fonts",
+        "ttf-ubuntu-font-family"
+      ],
+      "nvidia": [
+        "mesa",
+        "lib32-mesa",
+        "mesa-utils",
+        "xf86-video-nouveau",
+        "xf86-video-intel",
+        "vulkan-intel",
+        "lib32-vulkan-intel",
+        "switcheroo-control"
+      ],
+      "themes": [
+        "breeze", 
+        "papirus-icon-theme"
+      ],
+      "browser": [
+        "vivaldi",
+        "vivaldi-ffmpeg-codecs",
+        "libnotify"
+      ]
+    },
+    "yay": {
+      "gnome": [
+        "gdm-settings",
+        "gnome-browser-connector"
+      ]
+    },
+    "custom": {
+      "themes": [
+        { 
+          "name": "Graphite-gtk-theme",
+          "src": "https://github.com/vinceliuice/Graphite-gtk-theme.git",
+          "install": [
+            "./install.sh -t blue -c dark --tweaks nord darker rimless normal",
+            "./install.sh -l -t blue -c dark --tweaks nord darker rimless normal",
+            "sudo ./install.sh -t blue -c dark --tweaks nord darker rimless normal",
+            "sudo ./install.sh -l -t blue -c dark --tweaks nord darker rimless normal",
+            "sudo ./install.sh -g -t blue -c dark --tweaks nord darker rimless normal"
+          ]
+        }
+      ]
+    }
+  }
+}
